@@ -10,10 +10,11 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
     try {
         const clerk = await clerkClient();
         // console.log(clerk, "clerk");
-        const { data } = await clerk.users.getUserList({ userIds });
+        const { data } = await clerk.users.getUserList({
+            userIds: userIds,
+        } as any);
         // console.log(data, "data");
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const users = data.map((user: any) => ({
             id: user.id,
             name: `${user.firstName} ${user.lastName}`,
